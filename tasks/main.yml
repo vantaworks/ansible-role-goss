@@ -1,0 +1,18 @@
+---
+# main tasks file for ansible-role-goss
+
+- name: "Main : Version Detection"
+  include: version_detection.yml
+  when:
+    - goss_state == "present"
+    - goss_version is not defined
+
+- name: "Main : Install Goss"
+  include: install.yml
+  when:
+    - goss_state == "present"
+
+- name: "Main : Uninstall Goss"
+  include: uninstall.yml
+  when:
+    - goss_state == "absent"

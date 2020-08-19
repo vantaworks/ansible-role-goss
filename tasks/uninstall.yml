@@ -1,0 +1,7 @@
+---
+# uninstall tasks file for ansible-role-goss
+
+- name: "Uninstall : Remove goss binary"
+  file:
+    path: "{{ goss_install_path }}"
+    state: absent

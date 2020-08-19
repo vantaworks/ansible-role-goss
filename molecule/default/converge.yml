@@ -1,0 +1,16 @@
+---
+- name: Converge
+  hosts: all
+
+  tasks:
+    - name: "Converge : Include ansible-role-goss (install)"
+      include_role:
+        name: "ansible-role-goss"
+
+    - name: "Converge : Set uninstall flags"
+      set_fact:
+        goss_state: "absent"
+
+    - name: "Converge : Include ansible-role-goss (uninstall)"
+      include_role:
+        name: "ansible-role-goss"

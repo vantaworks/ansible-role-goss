@@ -1,0 +1,10 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  tasks:
+    - name: "Verify : Run goss command"
+      command: "goss --version"
+      register: goss_output
+      changed_when: False

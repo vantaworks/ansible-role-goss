@@ -1,0 +1,17 @@
+---
+# install tasks file for ansible-role-goss
+
+- name: "Install : Check if goss is already installed"
+  stat:
+    path: "{{ goss_install_path }}"
+  register: is_installed
+
+- name: "Install : Download and install Goss"
+  get_url:
+    url: "{{ goss_download_url }}"
+    dest: "{{ goss_install_path }}"
+    mode: 0755
+  register: was_download
+  until: was_download is succeeded
+  retries: 3
+  when: not is_installed or goss_force_reinstall

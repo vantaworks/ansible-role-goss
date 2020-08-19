@@ -1,0 +1,16 @@
+---
+# version detection tasks file for ansible-role-goss
+
+- name: "Version Detection : Find Available Versions"
+  uri:
+    url: "{{ goss_version_url }}"
+    body_format: "json"
+  register: goss_versions_raw
+
+- name: "Version Detection : Setting the facts straight"
+  set_fact:
+    goss_versions_list: "{{ goss_versions_raw.json | map(attribute='name') | list }}"
+
+- name: "Version Detection : Select newest version"
+  set_fact:
+    goss_version: "{{ goss_versions_list.0 }}"
